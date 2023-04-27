@@ -2,7 +2,7 @@ import cors from 'cors';
 import createDebug from 'debug';
 import express from 'express';
 import morgan from 'morgan';
-import { errorsMiddleware } from './middlewares/errors.middlewares';
+import { errorsMiddleware } from './middlewares/errors.middlewares.js';
 
 const debug = createDebug('HER:app');
 export const app = express();
