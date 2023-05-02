@@ -47,7 +47,7 @@ describe('Given Figure Mongo Repo', () => {
       (FigureModel.findById as jest.Mock).mockImplementation(() =>
         mockExec(mockValueId)
       );
-      expect(async () => mockRepo.queryId('3')).rejects.toThrow();
+      expect(mockRepo.queryId('3')).rejects.toThrow();
     });
   });
 
@@ -87,14 +87,11 @@ describe('Given Figure Mongo Repo', () => {
       (FigureModel.findByIdAndUpdate as jest.Mock).mockImplementation(() =>
         mockExec(mockValue)
       );
-      expect(async () =>
-        mockRepo.update({ name: 'figure2' })
-      ).rejects.toThrow();
+      expect(mockRepo.update({ name: 'figure2' })).rejects.toThrow();
     });
   });
   describe('When the delete method is used', () => {
     test('Then it should delete the object', async () => {
-      const mockDeleted = { id: '1', name: 'figure1' };
       (FigureModel.findByIdAndDelete as jest.Mock).mockImplementation(() =>
         mockExec({})
       );
@@ -107,7 +104,7 @@ describe('Given Figure Mongo Repo', () => {
       (FigureModel.findByIdAndDelete as jest.Mock).mockImplementation(() =>
         mockExec(mockValue)
       );
-      expect(async () => mockRepo.delete('2')).rejects.toThrow();
+      expect(mockRepo.delete('2')).rejects.toThrow();
     });
   });
 });
