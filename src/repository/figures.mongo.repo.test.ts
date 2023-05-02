@@ -42,12 +42,12 @@ describe('Given Figure Mongo Repo', () => {
       expect(FigureModel.findById).toHaveBeenCalled();
       expect(result).toEqual({ id: '1' });
     });
-    test('Then the resolved value is null, it should throw an error', () => {
+    test('Then the resolved value is null, it should throw an error', async () => {
       const mockValueId = null;
       (FigureModel.findById as jest.Mock).mockImplementation(() =>
         mockExec(mockValueId)
       );
-      expect(mockRepo.queryId('3')).rejects.toThrow();
+      expect(async () => mockRepo.queryId('3')).rejects.toThrow();
     });
   });
 
@@ -82,12 +82,14 @@ describe('Given Figure Mongo Repo', () => {
       expect(FigureModel.findByIdAndUpdate).toHaveBeenCalled();
       expect(result).toEqual(mockUpdated);
     });
-    test('Then the resolved value is null, it should throw an error', () => {
+    test('Then the resolved value is null, it should throw an error', async () => {
       const mockValue = null;
       (FigureModel.findByIdAndUpdate as jest.Mock).mockImplementation(() =>
         mockExec(mockValue)
       );
-      expect(mockRepo.update({ name: 'figure2' })).rejects.toThrow();
+      expect(async () =>
+        mockRepo.update({ name: 'figure2' })
+      ).rejects.toThrow();
     });
   });
   describe('When the delete method is used', () => {
@@ -99,12 +101,12 @@ describe('Given Figure Mongo Repo', () => {
       expect(FigureModel.findByIdAndDelete).toHaveBeenCalled();
       expect(result).toBe(undefined);
     });
-    test('Then the resolved value is null, it should throw an error', () => {
+    test('Then the resolved value is null, it should throw an error', async () => {
       const mockValue = null;
       (FigureModel.findByIdAndDelete as jest.Mock).mockImplementation(() =>
         mockExec(mockValue)
       );
-      expect(mockRepo.delete('2')).rejects.toThrow();
+      expect(async () => mockRepo.delete('2')).rejects.toThrow();
     });
   });
 });
