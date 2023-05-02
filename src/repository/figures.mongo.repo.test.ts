@@ -47,7 +47,7 @@ describe('Given Figure Mongo Repo', () => {
       (FigureModel.findById as jest.Mock).mockImplementation(() =>
         mockExec(mockValueId)
       );
-      expect(async () => mockRepo.queryId('3')).rejects.toThrow();
+      await expect(async () => mockRepo.queryId('3')).rejects.toThrow();
     });
   });
 
