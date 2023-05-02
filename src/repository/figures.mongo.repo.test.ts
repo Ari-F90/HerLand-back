@@ -87,7 +87,7 @@ describe('Given Figure Mongo Repo', () => {
       (FigureModel.findByIdAndUpdate as jest.Mock).mockImplementation(() =>
         mockExec(mockValue)
       );
-      expect(async () =>
+      await expect(async () =>
         mockRepo.update({ name: 'figure2' })
       ).rejects.toThrow();
     });
@@ -106,7 +106,7 @@ describe('Given Figure Mongo Repo', () => {
       (FigureModel.findByIdAndDelete as jest.Mock).mockImplementation(() =>
         mockExec(mockValue)
       );
-      expect(async () => mockRepo.delete('2')).rejects.toThrow();
+      await expect(async () => mockRepo.delete('2')).rejects.toThrow();
     });
   });
 });
