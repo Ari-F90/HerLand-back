@@ -1,7 +1,7 @@
 import createDebug from 'debug';
 import { Figure } from '../entities/figure';
-import { HTTPError } from '../errors/errors';
-import { FigureModel } from './figures.mongo.model';
+import { HTTPError } from '../errors/errors.js';
+import { FigureModel } from './figures.mongo.model.js';
 import { FigureRepo } from './repo.interface';
 
 const debug = createDebug('HER: figure-mongo-repo');
