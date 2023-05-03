@@ -1,6 +1,7 @@
 import { FigureMongoRepo } from '../repository/figures.mongo.repo';
 import { FiguresController } from './figures.controller';
 import { Response, Request, NextFunction } from 'express';
+import { Figure } from '../entities/figure';
 
 describe('Given the Figures Controller', () => {
   const mockRepo: FigureMongoRepo = {
@@ -26,7 +27,7 @@ describe('Given the Figures Controller', () => {
       body: {},
       params: { id: '' },
     } as unknown as Request;
-    test('Then it should return the information', async () => {
+    test('Then if all the information is OK, it should return the information', async () => {
       await mockController.getOneFigure(req, resp, next);
       expect(mockRepo.queryId).toHaveBeenCalled();
       expect(resp.json).toHaveBeenCalled();
@@ -34,6 +35,29 @@ describe('Given the Figures Controller', () => {
     test('Then if there are errors, the next function should have been called', async () => {
       (mockRepo.queryId as jest.Mock).mockRejectedValue(new Error(''));
       await mockController.getOneFigure(req, resp, next);
+      expect(next).toHaveBeenCalled();
+    });
+  });
+
+  describe('When the post method is used', () => {
+    const mockFigure = {
+      name: 'test1',
+    } as unknown as Figure;
+    const mockReq = {
+      body: mockFigure,
+    } as unknown as Request;
+    const mockResp = {
+      json: jest.fn(),
+    } as unknown as Response;
+    const mockNext = jest.fn();
+    test('Then if all the information is OK, it should create the figure', async () => {
+      await mockController.post(mockReq, mockResp, next);
+      expect(mockRepo.create).toHaveBeenCalled();
+      expect(resp.json).toHaveBeenCalled();
+    });
+    test('Then if there are errors, the next function should have been called', async () => {
+      (mockRepo.create as jest.Mock).mockRejectedValue(new Error(''));
+      await mockController.post(mockReq, mockResp, next);
       expect(next).toHaveBeenCalled();
     });
   });
