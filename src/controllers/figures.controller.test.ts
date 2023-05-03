@@ -1,6 +1,6 @@
 import { FigureMongoRepo } from '../repository/figures.mongo.repo';
 import { FiguresController } from './figures.controller';
-import { Response, Request, NextFunction } from 'express';
+import { Response, Request } from 'express';
 import { Figure } from '../entities/figure';
 
 describe('Given the Figures Controller', () => {
@@ -51,13 +51,13 @@ describe('Given the Figures Controller', () => {
     } as unknown as Response;
     const mockNext = jest.fn();
     test('Then if all the information is OK, it should create the figure', async () => {
-      await mockController.post(mockReq, mockResp, next);
+      await mockController.post(mockReq, mockResp, mockNext);
       expect(mockRepo.create).toHaveBeenCalled();
       expect(resp.json).toHaveBeenCalled();
     });
     test('Then if there are errors, the next function should have been called', async () => {
       (mockRepo.create as jest.Mock).mockRejectedValue(new Error(''));
-      await mockController.post(mockReq, mockResp, next);
+      await mockController.post(mockReq, mockResp, mockNext);
       expect(next).toHaveBeenCalled();
     });
   });
