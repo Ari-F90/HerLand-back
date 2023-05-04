@@ -130,8 +130,9 @@ describe('Given the Figures Controller', () => {
     });
     test('Then if there is an error, the next function should have been called', async () => {
       const req = {
-        body: {
-          id: '2',
+        body: { id: '2' },
+        params: {
+          id: undefined,
         },
       } as unknown as Request;
       (mockRepo.update as jest.Mock).mockRejectedValue(new Error(''));
