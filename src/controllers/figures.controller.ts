@@ -16,7 +16,7 @@ export class FiguresController {
       debug('Get all figures method');
       const pageCount = req.query.page || '1';
       const pageNumber = Number(pageCount);
-      if (pageNumber < 1 || pageNumber > 20)
+      if (pageNumber < 1 || pageNumber > 15)
         throw new HTTPError(404, 'Not found a valid page', 'Wrong page number');
       const category = req.query.category || 'all';
       let selectedFigure: Figure[];
