@@ -23,7 +23,19 @@ const figureSchema = new Schema<Figure>({
     type: String,
     required: true,
   },
-  description: {
+  description1: {
+    type: String,
+    required: true,
+  },
+  description2: {
+    type: String,
+    required: true,
+  },
+  description3: {
+    type: String,
+    required: true,
+  },
+  description4: {
     type: String,
     required: true,
   },
