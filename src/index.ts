@@ -4,7 +4,7 @@ import { app } from './app.js';
 import { dbConnect } from './db/db.connect.js';
 
 const debug = createDebug('HER');
-const PORT = process.env.PORT || 4500;
+const PORT = process.env.PORT ?? 4500;
 
 const server = http.createServer(app);
 
