@@ -31,8 +31,8 @@ export class FiguresController {
       }
 
       const figureData = selectedFigure.slice(
-        (pageNumber - 1) * 6,
-        pageNumber * 6
+        (pageNumber - 1) * 8,
+        pageNumber * 8
       );
       resp.status(201);
       resp.json({
